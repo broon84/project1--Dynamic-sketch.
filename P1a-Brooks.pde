@@ -2,7 +2,7 @@
 
 
 float sunX, sunY; //variables for sun
-float dsunX;
+float sunDX;
 
 float x,y;        // Position of man
 
@@ -15,7 +15,7 @@ void setup() {
   
   sunX=  width/10;   // Reset the sun position.
   sunY=  100;
-  dsunX=  4;  
+  sunDX=  4;  
 }
 
 // NEXT FRAME ////
@@ -27,18 +27,19 @@ void draw()
   fill(0, 200, 0);                     //green grass rectangle color
   rect(0, 600, 2000, 600);            //rectangle grass
   
+  sun();
   
   
   house();
   man();
-  sun();
+  move();
   action();
  
  
  //// screen text messages
- 
+  fill( 255, 0, 0 );                     ////  text color 
   textSize(26);
-  text( "waah gwaan, peeps", x+200, y+100 );
+  text( "waah gwaan,  peeps", x+50, y-50 );
   
   
   fill( 250, 0,0 );                                   //// red text color tittle
@@ -60,7 +61,7 @@ void sun()
 {
   
   fill( 255, 255, 0 );                     //// yellow sun color
-  ellipse (sunX=100,sunY=65,75,80);    //// yellow ellipse sun
+  ellipse (sunX,sunY,75,80);    //// yellow ellipse sun
   ////ellipse (x-100,y=65,75,80);     ////makes sun and man moves together
 }
 
@@ -69,12 +70,11 @@ void sun()
 
 void move()
 {
-  if (x>width) {
-    sunX=100;
-    sunY=100;
+  if (sunX>width) {
+    sunX=  50;
+    sunY=  random( 20, height/4 );
   }
-  sunX=  x + 3;
-  sunY=  y + 2;
+  sunX=  sunX + sunDX;
 }
 
 
@@ -116,8 +116,9 @@ void man()
   ellipse( x-19, y-30, 16, 32 ); 
   //--  ellipse(119, 70, 16, 32); 
   ellipse( x+19, y-30, 16, 32 ); 
-  line( x+90, y-150, 80, 160 );
-  line( x+110, y-150, 120, 160 );
+  // legs
+  line( x-10, y+50, x-20, y+90 );
+  line( x+10, y+50, x+20, y+90 );
 }
 
 //// Move the man (by changing x,y)
